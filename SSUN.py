@@ -292,7 +292,7 @@ for r in range(0,randtime):
     
     
     model = SSUN(time_step=time_step,nb_features=nb_features,num_PC=num_PC,img_rows=img_rows,img_cols=img_cols)
-    histloss=model.fit([X_train,XP_train], [y_train,y_train,y_train], nb_epoch=nb_epoch, batch_size=batch_size, verbose=1, shuffle=True)
+    histloss=model.fit([X_train,XP_train], [y_train,y_train,y_train], epochs=nb_epoch, batch_size=batch_size, verbose=1, shuffle=True)
     losses = histloss.history
     
 
