@@ -8,6 +8,7 @@
 import scipy.io as sio  
 import numpy as np  
 import matplotlib.pyplot as plt
+from libtiff import TIFF
 
 def featureNormalize(X,type):
     #type==1 x = (x-mean)/std(x)
@@ -141,27 +142,13 @@ def CalAccuracy(predict,label):
     return OA,Kappa,producerA
    
 def HyperspectralSamples(dataID=1, timestep=4, w=24, num_PC=3, israndom=False, s1s2=2):   
-    #dataID=1:Pavia University
-    #dataID=2:Indian
-    #dataID=6:KSC
+    #dataID=1:Aviris Gisdata
 
     if dataID==1:
-        data = sio.loadmat('data/yonghao.xu/HSI/DataSets/PaviaU.mat')
-        X = data['paviaU']
-    
-        data = sio.loadmat('data/yonghao.xu/HSI/DataSets/PaviaU_gt.mat')
-        Y = data['paviaU_gt']
+        X = np.transpose(TIFF.open('/content/drive/My Drive/data/AVIRIS1-u1.tif').read_image(),(1,2,0))
+        Y = TIFF.open('/content/drive/My Drive/data/AVIRIS1-u1-gt.tif').read_image()
         
         train_num_array = [548, 540, 392, 542, 256, 532, 375, 514, 231]
-    elif dataID==2:
-        data = sio.loadmat('data/yonghao.xu/HSI/DataSets/Indian_pines_corrected.mat')
-        X = data['data']
-    
-        data = sio.loadmat('data/yonghao.xu/HSI/DataSets/Indian_pines_gt.mat')
-        Y = data['groundT']
-        
-        train_num_array = [30, 150, 150, 100, 150, 150, 20, 150, 15, 150, 150, 150, 150, 150, 50, 50]
-
    
     train_num_array = np.array(train_num_array).astype('int')
     [row,col,n_feature] = X.shape
