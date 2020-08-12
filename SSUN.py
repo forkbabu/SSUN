@@ -121,7 +121,7 @@ def MSCNN_RS(num_PC,img_rows,img_cols):
     CNNSOFTMAX = Dense(nb_classes,activation='softmax', name='CNNSOFTMAX')(CNNDense)
     
     
-    model = Model(input=[CNNInput], output=[CNNSOFTMAX])
+    model = Model(inputs=CNNInput, outputs=CNNSOFTMAX)
     adam = Adam(lr=1e-4, beta_1=0.9, beta_2=0.999, amsgrad=False)
     
     model.compile(optimizer=adam, loss='categorical_crossentropy',
@@ -232,7 +232,7 @@ for r in range(0,randtime):
     
     model = MSCNN_RS(num_PC,img_rows,img_cols)
     
-    histloss=model.fit([XP_train], [y_train], nb_epoch=nb_epoch, batch_size=batch_size, verbose=1, shuffle=True)
+    histloss=model.fit([XP_train], [y_train], epochs=nb_epoch, batch_size=batch_size, verbose=1, shuffle=True)
     losses = histloss.history
     
 
