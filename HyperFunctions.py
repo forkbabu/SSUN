@@ -146,29 +146,22 @@ def HyperspectralSamples(dataID=1, timestep=4, w=24, num_PC=3, israndom=False, s
     #dataID=6:KSC
 
     if dataID==1:
-        data = sio.loadmat('/data/yonghao.xu/HSI/DataSets/PaviaU.mat')
+        data = sio.loadmat('data/yonghao.xu/HSI/DataSets/PaviaU.mat')
         X = data['paviaU']
     
-        data = sio.loadmat('/data/yonghao.xu/HSI/DataSets/PaviaU_gt.mat')
+        data = sio.loadmat('data/yonghao.xu/HSI/DataSets/PaviaU_gt.mat')
         Y = data['paviaU_gt']
         
         train_num_array = [548, 540, 392, 542, 256, 532, 375, 514, 231]
     elif dataID==2:
-        data = sio.loadmat('/data/yonghao.xu/HSI/DataSets/Indian_pines_corrected.mat')
+        data = sio.loadmat('data/yonghao.xu/HSI/DataSets/Indian_pines_corrected.mat')
         X = data['data']
     
-        data = sio.loadmat('/data/yonghao.xu/HSI/DataSets/Indian_pines_gt.mat')
+        data = sio.loadmat('data/yonghao.xu/HSI/DataSets/Indian_pines_gt.mat')
         Y = data['groundT']
         
         train_num_array = [30, 150, 150, 100, 150, 150, 20, 150, 15, 150, 150, 150, 150, 150, 50, 50]
-    elif dataID==6:
-        data = sio.loadmat('/data/yonghao.xu/HSI/DataSets/KSC.mat')
-        X = data['KSC']
-        X[np.where(X>700)] = 0
-        data = sio.loadmat('/data/yonghao.xu/HSI/DataSets/KSC_gt.mat')
-        Y = data['KSC_gt']
-        
-        train_num_array = [33, 23, 24, 24, 15, 22, 9, 38, 51, 39, 41, 49, 91]
+
    
     train_num_array = np.array(train_num_array).astype('int')
     [row,col,n_feature] = X.shape
